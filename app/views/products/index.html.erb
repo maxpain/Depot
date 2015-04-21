@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Список товаров</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= link_to 'Название', products_path(iluha: :title) %></th>
+      <th><%= link_to 'Описание', products_path(iluha: :description)%></th>
+      <th>Изображение</th>
+      <th><%= link_to 'Цена', products_path(iluha: :price)%></th>
+      <% if user_signed_in? %>
+      <th></th>
+      <% end %>
+      <th></th>         
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.title, product_path(product) %></td>
+        <td><%= product.description %></td>
+        <td><%= image_tag product.image_url.small.url %></td>
+        <td><%= product.price %></td>
+
+        <% if user_signed_in? %>
+          <% if current_user.email == 'iljakolesnikoff@yandex.ru' %>
+            <td><%= link_to 'Редактировать', edit_product_path(product), class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Удалить', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          <% end %>        
+        <% end %>          
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+  <% if current_user.email == 'iljakolesnikoff@yandex.ru' %>
+    <%= link_to 'Добавить продукт', new_product_path, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

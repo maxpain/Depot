@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Depot</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <!--<div class="container">
+        <img src="Pictures/1.png" class="img-circle"> 
+        </div>   -->
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Главная", welcome_index_path  %></li>
+          <li><%= link_to "Товары", products_path  %></li>          
+          <li><%= link_to "О нас", about_index_path  %></li>
+        </ul>
+        <p class="navbar-text navbar-right">
+          <% if user_signed_in? %>
+            Вы вошли как <%= current_user.email %>
+            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+          <% else %>
+            <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container content">
+    <div class="row">
+      <div class="col-lg-9">
+        <%= bootstrap_flash %>
+        <%= yield %>
+      </div>
+    </div><!--/row-->
+
+    <footer>
+      <p>&copy; Company 2015</p>
+    </footer>
+
+  </div> <!-- /container -->
+
+</body>
+</html>

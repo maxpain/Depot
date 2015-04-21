@@ -1,0 +1,4 @@
+<h1>Ваш профиль</h1>
+<% if user_signed_in? %>
+<span>Ваша почта: <%= current_user.email %></span>
+<% end %>

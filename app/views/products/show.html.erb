@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Название:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Изображение:</strong>
+  <%= image_tag @product.image_url.small.url %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<%= link_to 'Редактировать', edit_product_path(@product) %> |
+<%= link_to 'Назад', products_path %>
