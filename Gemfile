@@ -32,7 +32,10 @@ gem 'devise'
 
 gem 'will_paginate'
 
-gem 'pg'
+group :production do
+  gem 'thin'
+  gem 'pg'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
