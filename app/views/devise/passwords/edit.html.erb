@@ -5,17 +5,17 @@
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
-    <%= f.label :password, "New password" %><br />
+    <%= f.label :password, "Новый пароль" %><br />
     <%= f.password_field :password, autofocus: true, autocomplete: "off",class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
+    <%= f.label :password_confirmation, "Подтвердите новый пароль" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "Обновить" %>
   </div>
 <% end %>
 
