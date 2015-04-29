@@ -30,7 +30,12 @@ gem 'rmagick'
 
 gem 'devise'
 
-gem 'will_paginate'
+#gem 'will_paginate'
+
+gem 'kaminari'
+
+gem 'activeadmin', github: 'activeadmin'
+gem 'rails_admin'
 
 group :production do
   gem 'thin'

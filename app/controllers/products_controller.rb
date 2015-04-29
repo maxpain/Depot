@@ -1,15 +1,15 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   
-
+  include CurrentCart
+  before_action :set_cart
   # GET /products
   # GET /products.json
   def index
-    #if params[:iluha] == :price
-      @products = Product.order(params[:iluha])
-   # end
+   
+      @products = Product.order(params[:iluha]).page(params[:page]).per(3)
+   
   end 
-  # @products = Product.where("price >= ?",params[:product]).order(price)
   # @products = Product.all
 
   # GET /products/1 
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to @product, notice: 'Товар успешно создан.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Товар успешно обновлен.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Товар успешно удален.' }
       format.json { head :no_content }
     end
   end

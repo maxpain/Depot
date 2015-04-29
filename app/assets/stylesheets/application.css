@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+ #side {
+float: left;
+padding: 1em 2em;
+width: 13em;
+background: #141;
+
+form, div {
+display: inline;
+}
+input {
+font-size: small;
+}

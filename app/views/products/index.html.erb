@@ -12,6 +12,7 @@
       <% if user_signed_in? %>
       <th></th>
       <% end %>
+      <th></th>
       <th></th>         
     </tr>
   </thead>
@@ -27,13 +28,20 @@
         <% if user_signed_in? %>
           <% if current_user.email == 'iljakolesnikoff@yandex.ru' %>
             <td><%= link_to 'Редактировать', edit_product_path(product), class: 'btn btn-primary' %></td>
-            <td><%= link_to 'Удалить', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-          <% end %>        
+            <td><%= link_to 'Удалить', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td> 
+            <% end %>
+            <td class="price_line">                
+                <%= button_to 'Add to Cart', line_items_path(product_id: product), class: 'btn btn-primary' %></td>        
         <% end %>          
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br>
+
+
+<%= paginate @products %>  
 
 <br>
 <% if user_signed_in? %>
