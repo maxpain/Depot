@@ -1,0 +1,24 @@
+<%= form_for(@tiping) do |f| %>
+  <% if @tiping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tiping.errors.count, "error") %> prohibited this tiping from being saved:</h2>
+      <ul>
+      <% @tiping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field">
+    <strong>Наименование</strong>
+    <%= f.text_field :title, class: "form-control", placeholder: "Введите наименование"%>
+  </div><br>
+  <div class="field">
+    <strong>Описание</strong>
+    <%= f.text_area :description, class: "form-control", rows: "3", placeholder: "Введите описание" %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

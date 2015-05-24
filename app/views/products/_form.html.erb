@@ -1,0 +1,42 @@
+<%= form_for @product, multipart: true do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+
+  <div class="field">
+    <strong>Наименование</strong>
+    <%= f.text_field :title, class: "form-control", placeholder: "Введите наименование"%>   
+  </div><br>
+  <div class="field">
+    <strong>Описание</strong>
+    <%= f.text_area :description, class: "form-control", rows: "3", placeholder: "Введите описание" %>
+  </div><br>
+  <div class="field">
+    <strong>Изображение</strong>
+    <%= f.file_field :image_url, class: "form-control" %>
+  </div><br>
+  <div class="field">
+    <strong>Тип продукта</strong>
+    <%= f.select(:tiping_id, options_from_collection_for_select(Tiping.all, :id, :title)) %>
+  </div><br>
+  <div class="field">
+    <strong>Цена</strong>
+    <%= f.text_field :price, class: "form-control", placeholder: "Введите цену" %>
+  </div><br>
+  <div class="field">
+    <strong>Производитель</strong>
+    <%= f.select(:manufacturer_id, options_from_collection_for_select(Manufacturer.all, :id, :title)) %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

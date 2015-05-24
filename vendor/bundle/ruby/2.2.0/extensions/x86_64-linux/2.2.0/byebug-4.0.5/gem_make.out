@@ -1,0 +1,15 @@
+/home/pain/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20150416-17264-g1o6mh.rb extconf.rb 
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling byebug.c
+compiling threads.c
+compiling context.c
+compiling breakpoint.c
+compiling locker.c
+linking shared-object byebug/byebug.so
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 byebug.so ./.gem.20150416-17264-1egmvy7/byebug

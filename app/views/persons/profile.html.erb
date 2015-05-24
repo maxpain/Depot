@@ -1,0 +1,10 @@
+<h1>Ваш профиль</h1>
+
+<% if user_signed_in? %>
+  <span>Ваша почта: <%= current_user.email %></span>
+<% end %>
+<% if user_signed_in? %>
+<% if current_user.admin? %><br>
+  <%= link_to 'Админка', admin_root_path, class: 'btn btn-primary' %>
+<% end %>
+<% end %>

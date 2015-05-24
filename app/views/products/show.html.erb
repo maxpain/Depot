@@ -1,0 +1,34 @@
+<p id="notice">
+
+<p>  
+  <h1><%= @product.tiping.title %></h1>
+  <h1><%= @product.title %></h1>
+</p>
+
+<div class="col-xs-8">
+  <p>
+    <%= @product.description %>
+  </p>
+</div>
+
+<p>
+  <%= image_tag @product.image_url.small.url %>
+</p>
+
+<p>
+  <strong>Производитель:</strong>
+  <%= @product.manufacturer.title %>
+</p>
+
+<p>
+  <strong>Цена:</strong>
+  <%= @product.price %>
+</p>
+
+
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= link_to 'Редактировать', edit_product_path(@product) %>
+    <%end%>
+  <%end%>
+<%= link_to 'Назад', products_path %>

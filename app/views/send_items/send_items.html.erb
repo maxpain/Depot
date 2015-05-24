@@ -1,0 +1,32 @@
+<strong>Запчасти на оплату</strong>
+<ul class='list-group'>
+  <% current_order.line_items.each do |line_item| %>
+    <li class='list-group-item'>
+      <span class='badge'><%= line_item.count %></span>
+      <%= line_item.product.title %>
+      Цена:
+      <%= line_item.total_price %>   
+    </li>
+  <% end %>
+  Итого:
+  <%=current_order.calculate_total_price%>
+  <br/>
+
+
+  <p>
+  <strong>Заполните форму отправки пакета необходимых запчастей</strong>
+      <%= form_for current_order, url: send_to_user_order_path(current_order), html: {class: "nifty_form"} do |f| %>        
+        <%= f.label "Почта отправителя" %>
+        <%= f.text_field :email, class: 'form-control' %><br>        
+        <%= f.label "ФИО отправителя" %>
+        <%= f.text_field :fio, class: 'form-control' %><br>
+        <%= f.label "Номер телефона отправителя" %>
+        <%= f.text_field :phone_number, class: 'form-control' %><br>
+        <%= f.label "Сообщение" %>
+        <%= f.text_field :message, class: 'form-control' %><br>             
+        <%= f.label "Почта получателя" %><br>
+        <%= f.select(:send_user_id, options_from_collection_for_select(User.all, :id, :email)) %><br>
+        <br>
+        <%= f.submit 'Отправить', class: 'btn btn-success' %>
+      <% end %>
+</p>

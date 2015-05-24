@@ -1,0 +1,29 @@
+<p id="notice"></p>
+
+<h1>Виды продуктов</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Наименование</th>
+      <th>Описание</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipings.each do |tiping| %>
+      <tr>
+        <td><%= link_to tiping.title, tiping %></td>
+        <td><%= tiping.description %></td>
+        
+        <td><%= link_to 'Редактировать', edit_tiping_path(tiping), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to 'Удалить', tiping, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Добавить вид', new_tiping_path, class: 'btn btn-primary' %>

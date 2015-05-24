@@ -1,0 +1,14 @@
+<p id="notice"></p>
+
+<p>
+  <strong>Наименование:</strong>
+  <%= @tiping.title %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @tiping.description %>
+</p>
+
+<%= link_to 'Редактировать', edit_tiping_path(@tiping) %> |
+<%= link_to 'Назад', tipings_path %>

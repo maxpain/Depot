@@ -1,0 +1,74 @@
+<h1>Список товаров на складе</h1>
+
+
+  <div class="well sidebar-nav">
+  <h3>Отсеять</h3>
+    <%= search_form_for @search, url: products_path, html: { class: 'task-search-form' } do |f| %>
+      <%= f.label :tiping_id, "Тип продукции" %>
+      <%= f.select :tiping_id_eq, options_from_collection_for_select(Tiping.all, :id, :title), { class: 'span2' } %>
+      <%= f.submit "Отсеять", class: "btn btn-primary" %>
+      <%= link_to "Показать все", products_path, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= link_to 'Название', products_path(iluha: :title) %></th>
+      <th><%= link_to 'Описание', products_path(iluha: :description)%></th>
+      <th>Изображение</th>
+      <th><%= link_to 'Цена', products_path(iluha: :price)%></th>
+      <th><%= link_to 'Производитель', products_path(iluha: :manufacturer_title_id)%></th>
+      <% if user_signed_in? %>
+        <th></th>
+      <% end %>
+        <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <th>Количество</th>
+        <% end %>  
+        <% end %>       
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.title, product_path(product) %></td>
+        <td><%= product.description[0..100] + '...' %></td>
+        <td><%= image_tag product.image_url.very_small.url %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to product.manufacturer.title, manufacturer_path(product.manufacturer) if product.manufacturer %></td>
+
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Редактировать', edit_product_path(product), class: 'btn btn-primary btn-sm' %><br>
+            <br>
+              <%= link_to 'Удалить', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+            <td>
+              <%= form_for current_order.line_items.find_by(product_id: product.id) || LineItem.new, html: {class: "nifty_form"} do |f| %>
+                <%= f.hidden_field :product_id, value: product.id %>
+                <%= f.number_field :count, required: true, min: '1', placeholder: 'Введите количество' %>
+                <br/>
+                <br/>
+                
+                <%= f.submit "Добавить", class: 'btn btn-primary btn-lg btn-block' %>
+                
+              <% end %>
+            </td>
+          <% end %>        
+        <% end %>          
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @products %>
+
+<br>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to 'Добавить продукт', new_product_path, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

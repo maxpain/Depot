@@ -1,0 +1,27 @@
+<p id="notice">
+
+<p>
+  <h2><%= @manufacturer.title %></h2>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @manufacturer.description %>
+</p>
+
+<p>
+  <strong>Страна:</strong>
+  <%= @manufacturer.country %>
+</p>
+
+<p>
+  <strong>Город:</strong>
+  <%= @manufacturer.city %>
+</p>
+
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= link_to 'Редактировать', edit_manufacturer_path(@manufacturer) %>
+    <%end%>
+  <%end%>
+  <%= link_to 'Назад', products_path %>

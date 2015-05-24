@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <h1>Ремонт компьютеров</h1>
+  <p>Ремонтное предприятие осуществляет ремонт компьютеров различных производителей. Заказы могут проходить формально и в онлайн режиме.</p>
+
+  <tbody >
+  
+    <% @tidings.each do |tiding| %>
+      <tr>
+        <div class="well sidebar-nav">
+          <%= image_tag tiding.image_url.small.url %>
+            <div class="col-xs-8">
+              <p><%= link_to tiding.title, tiding %></p>
+              <%= tiding.description[0..240] + '...'  %>
+              <%= link_to 'читать дальше...', tiding %><br>
+
+              <% if user_signed_in? %>
+              <% if current_user.admin? %>       
+                <td><%= link_to 'Редактировать', edit_tiding_path(tiding), class: 'btn btn-default btn-xs' %></td>
+                <td><%= link_to 'Удалить', tiding, class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+              <% end %>
+            </div>
+         </div>
+      </tr>
+    <% end %>
+   
+  </tbody>
+
+  <% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to "Добавить новость", new_tiding_path, class: 'btn btn-primary btn-lg' %>
+  <% end %>
+  <% end %>
+</div>
+
+
+

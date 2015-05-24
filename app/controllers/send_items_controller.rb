@@ -1,0 +1,4 @@
+class SendItemsController < ApplicationController
+
+  
+end

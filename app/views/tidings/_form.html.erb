@@ -1,0 +1,29 @@
+<%= form_for(@tiding) do |f| %>
+  <% if @tiding.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tiding.errors.count, "error") %> prohibited this tiding from being saved:</h2>
+
+      <ul>
+      <% @tiding.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong>Наименование</strong>
+    <%= f.text_field :title, class: "form-control", placeholder: "Введите наименование"%>
+  </div><br>
+  <div class="field">
+    <strong>Описание</strong>
+    <%= f.text_area :description, class: "form-control", rows: "3", placeholder: "Введите описание" %>
+  </div><br>
+  <div class="field">
+    <strong>Изображение</strong>
+    <%= f.file_field :image_url, class: "form-control" %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

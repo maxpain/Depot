@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+
+  <h1><%= @tiding.title %></h1>
+
+<div class="col-xs-8">
+  <p>
+    <%= @tiding.description %>
+  </p>
+</div>
+  <%= image_tag @tiding.image_url.small.url %><br>
+
+<% if user_signed_in? %>
+<% if current_user.admin? %>  
+  <%= link_to 'Редактировать', edit_tiding_path(@tiding) %>
+<% end %>
+<% end %>
+<%= link_to 'Назад', welcome_index_path %>
