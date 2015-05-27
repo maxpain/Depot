@@ -6,7 +6,7 @@
   
     <% @tidings.each do |tiding| %>
       <tr>
-        <div class="well sidebar-nav">
+        <div class="well sidebar-nav col-xs-12">
           <%= image_tag tiding.image_url.small.url %>
             <div class="col-xs-8">
               <p><%= link_to tiding.title, tiding %></p>
@@ -20,7 +20,7 @@
               <% end %>
               <% end %>
             </div>
-         </div>
+        </div>
       </tr>
     <% end %>
    
@@ -30,6 +30,8 @@
   <% if current_user.admin? %>
     <%= link_to "Добавить новость", new_tiding_path, class: 'btn btn-primary btn-lg' %>
   <% end %>
+  <% else %>
+  .
   <% end %>
 </div>
 

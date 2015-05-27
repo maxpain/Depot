@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   
   before_create :set_status
 
-  enum status: [:cart, :sended, :completed, :performed, :made]
+  enum status: [:cart, :sended, :completed, :performed, :maded]
 
   def send!(send_params)
     update(send_params.merge(status: :sended))
@@ -16,6 +16,10 @@ class Order < ActiveRecord::Base
 
   def perform!
     update(status: :performed)
+  end
+
+  def made!
+    update(status: :maded)
   end
 
   def calculate_total_price

@@ -1,7 +1,7 @@
 class ManufacturersController < InheritedResources::Base
 
   def index    
-      @manufacturers = Manufacturer.order(params[:iluha])
+    @manufacturers = Manufacturer.order(params[:iluha])
   end 
 
   def show

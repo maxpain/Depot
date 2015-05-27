@@ -20,11 +20,11 @@ class TidingsController < InheritedResources::Base
 
     respond_to do |format|
       if @tiding.save
-        format.html { redirect_to @tiding, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @tiding }
+        format.html { redirect_to @tiding, notice: 'Новость добавлена' }
+
       else
         format.html { render :new }
-        format.json { render json: @tiding.errors, status: :unprocessable_entity }
+
       end
     end
   end

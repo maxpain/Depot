@@ -7,21 +7,10 @@ class LineItemsController < ApplicationController
     redirect_to products_path
   end
 
-
-
   def update
     @line_item = LineItem.find(params[:id])
     @line_item.update(permitted_params)
     redirect_to products_path
-  end
-
-  def destroy_all
-
-    current_order.line_items.delete_all
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Cart destroyed' }
-      format.json { head :no_content }
-    end
   end
 
   def destroy
@@ -34,12 +23,10 @@ class LineItemsController < ApplicationController
       redirect_path = orders_path
     end
 
-    #current_order.line_items.delete_all
     respond_to do |format|
       format.html do
         redirect_to redirect_path || request.referer || products_path, notice: 'Item destroyed'
       end
-      format.json { head :no_content }
     end
   end
 

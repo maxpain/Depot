@@ -13,7 +13,7 @@
   <%=current_order.calculate_total_price%>  
   <br/>
   <%= link_to 'Отправить', send_items_send_items_path, class: 'btn btn-primary' %>  
-  <%= link_to 'Очистить', destroy_all_line_items_path, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <%= link_to 'Очистить', destroy_all_line_items_order_path(current_order), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <%else%>
   Корзина пуста
   <% end %>

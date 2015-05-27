@@ -1,4 +1,2 @@
-class SendItemsController < ApplicationController
-
-  
+class SendItemsController < ApplicationController  
 end

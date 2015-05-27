@@ -15,11 +15,11 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th><%= link_to 'Название', products_path(iluha: :title) %></th>
-      <th><%= link_to 'Описание', products_path(iluha: :description)%></th>
+      <th><%= link_to 'Название', products_path(params.merge(iluha: :title)) %></th>
+      <th><%= link_to 'Описание', products_path(params.merge(iluha: :description)) %></th>
       <th>Изображение</th>
-      <th><%= link_to 'Цена', products_path(iluha: :price)%></th>
-      <th><%= link_to 'Производитель', products_path(iluha: :manufacturer_title_id)%></th>
+      <th><%= link_to 'Цена', products_path(params.merge(iluha: :price)) %></th>
+      <th><%= link_to 'Производитель', products_path(params.merge(iluha: :manufacturer_title_id)) %></th>
       <% if user_signed_in? %>
         <th></th>
       <% end %>

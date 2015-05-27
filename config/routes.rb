@@ -16,15 +16,15 @@ Rails.application.routes.draw do
   get 'persons/profile', as: 'user_root'
 
   resources :products
-  resources :line_items, only: [:create, :update, :destroy] do
-    get 'destroy_all', on: :collection
-  end
+  resources :line_items, only: [:create, :update, :destroy]
 
   resources :orders do
     member do
       patch :send_to_user
       get :user_complete
       get :admin_perform
+      get :admin_made
+      get :destroy_all_line_items
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

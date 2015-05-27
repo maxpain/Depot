@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
 
   def index
-    if current_user.try(:admin?)      
-      @orders = Order.all
+    if current_user.try(:admin?)  
+      @orders = Order.where("status >= 1")
     else
       @orders = Order.where(send_user_id: current_user.try(:id))    
     end
@@ -31,13 +31,29 @@ class OrdersController < ApplicationController
     end
     redirect_to orders_path
   end
-  
+
+  def admin_made
+    @order = Order.find(params[:id])
+    if @order.made!    
+      flash[:notice] = 'Заказ выполнен'
+    else
+      flash[:alert] = 'Не удалось завершить выполнение'
+    end
+    redirect_to orders_path
+  end
+
+  def destroy_all_line_items
+    @order = Order.find(params[:id])
+    @order.line_items.map(&:delete)
+    redirect_to products_url, notice: 'Корзина очищена'
+  end  
 
   def send_to_user
     @order = current_order
     if @order.send!(send_to_user_params)
-      session[:current_order] = nil
+      cookies[:current_order] = nil
       flash[:notice] = 'Товары отправлены'
+      check_current_order
     else
       flash[:alert] = 'Не удалось отправить товары'
     end
@@ -47,11 +63,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    #current_order.line_items.delete_all
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order destroyed' }
-      format.json { head :no_content }
-    end
+    redirect_to orders_url, notice: 'Заказ удален'    
   end
 
   private

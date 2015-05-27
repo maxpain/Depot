@@ -3,12 +3,12 @@
 
   <h1><%= @tiding.title %></h1>
 
-<div class="col-xs-8">
+<div class="col-xs-9">
   <p>
     <%= @tiding.description %>
   </p>
 </div>
-  <%= image_tag @tiding.image_url.small.url %><br>
+  <%= image_tag @tiding.image_url.small.url %><br><br>
 
 <% if user_signed_in? %>
 <% if current_user.admin? %>  

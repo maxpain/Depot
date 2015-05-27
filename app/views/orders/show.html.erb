@@ -1,3 +1,7 @@
+<% if @order.maded? && current_user.user? %>
+<%= render 'end' %>
+<% else %>
+
 <p>
   <strong>Заказ номер</strong>
   <%= @order.id %>
@@ -18,11 +22,10 @@
   <strong>Сообщение:</strong>
   <%=@order.message %>
 </p>
-
 <p>
   <strong>Статус:</strong>
   <% if @order.completed? %>
-    Подтверждено
+    Подтверждено, ваш заказ в очереди
   <% end %>
   <% if @order.sended? %>
     Не подтверждено
@@ -30,6 +33,12 @@
   <% if @order.performed? %>
     Выполняется
   <% end %>
+  <% if @order.maded? %>
+    Выполнен
+  <% end %>
+  
+  
+  
 </p>
 
 <ul class='list-group'>
@@ -50,12 +59,15 @@
 
   <% if current_user.admin? %>
     Итого:
-    <%=current_order.calculate_total_price%><br>
+    <%=@order.calculate_total_price%><br>
       <% if @order.cart? %>
         <%= link_to 'Отправить', send_items_send_items_path, class: 'btn btn-primary' %>
       <% end %>
       <% if @order.completed? %>
         <%= link_to 'Выполнить заказ', admin_perform_order_path(@order), class: 'btn btn-primary' %>
+      <% end %>
+      <% if @order.performed? %>
+        <%= link_to 'Завершить заказ', admin_made_order_path(@order), class: 'btn btn-primary' %>
       <% end %>
   <%else%>
     <div class="well sidebar-nav">
@@ -63,11 +75,15 @@
           Перед тем как подтвердить заказ внимательно ознакомьтесь со списком товаров и 
           иными данными, если у вас возникли вопросы, вы можете решить их по телефону, 
           указанному в форме выше.<br>
-        <%= link_to 'Подтвердить заказ', user_complete_order_path(@order), class: 'btn btn-primary' %>
-      <% end %>      
+        <%= link_to 'Подтвердить заказ', user_complete_order_path(@order), data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+      <% end %>
+      <% if @order.maded? %>
+          Ваш заказ выполнен! Если с вами не связались, то вы можете связаться с нами самостоятельно.<br>
+          <%= link_to 'Отчет', '#', class: 'btn btn-primary' %>
+      <% end %>     
     </div>
-  <% end %>
- 
+  <% end %> 
   
   <%= link_to 'Назад', orders_path, class: 'btn btn-primary' %>
 </ul>
+<% end %>

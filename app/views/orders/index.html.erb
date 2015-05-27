@@ -17,15 +17,18 @@
         <td><%= order.id %></td>
         <td><%= order.email %></td>
         <td><% if order.completed? %>
-            Подтверждено
+              Подтверждено
             <% end %>
-           <% if order.sended? %>
-            Не подтверждено
+            <% if order.sended? %>
+              Не подтверждено
             <% end %>
             <% if order.performed? %>
-            Выполняется
-            
-          <% end %></td>
+              Выполняется            
+            <% end %>
+            <% if order.maded? %>
+              Завершено
+            <% end %>
+        </td>
         <td><%= link_to 'Открыть', order_path(order), class: 'btn btn-primary' %></td>
         <td>
           <%= link_to 'Удалить', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>                        

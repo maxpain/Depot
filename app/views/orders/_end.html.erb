@@ -1,0 +1,43 @@
+<div class="well sidebar-nav col-xs-12">
+  <h1>Заказ номер <%= @order.id %> выполнен</h1>
+  <div class="well sidebar-nav col-xs-12">
+    <strong>Приобретенные товары:</strong>
+    <ul class='list-group'>
+      <% @order.line_items.each do |line_item| %>
+        <li class='list-group-item'>
+          <span class='badge'><%= line_item.count %></span>
+          <%= line_item.product.try(:title) %>
+          Цена:
+          <%= line_item.total_price %>
+        </li>
+      <% end %>
+      <strong>Итого:</strong>
+        <%= @order.calculate_total_price%>
+  </div>
+
+    <div class="well sidebar-nav col-xs-12">
+      Ваш заказ выполнен! Если с вами не связались, то вы можете связаться с нами самостоятельно по координатам, указанным ниже. Спасибо, что воспользовались нашими услугами.<br>
+    </div>
+
+  <p>
+    <strong>email:</strong>
+    <%=@order.email %>
+  </p>
+  <p>
+    <strong>Телефон:</strong>
+    <%=@order.phone_number %>
+  </p>
+  <p>
+    <strong>Отправитель:</strong>
+    <%=@order.fio %>
+  </p>
+  <p>
+    <strong>Дата:</strong>
+    <%=@order.updated_at %>
+  </p>
+     
+
+    
+    <%= link_to 'Назад', orders_path, class: 'btn btn-primary' %>
+  </ul>
+</div>
