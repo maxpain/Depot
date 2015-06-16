@@ -63,3 +63,7 @@ group :development, :test do
   gem 'railroady'
 end
 
+group :production do
+  gem 'pg'
+end
+
