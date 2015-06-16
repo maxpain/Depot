@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label 'Наименование' %><br>
-    <%= f.text_field :title %>
-  </div>
+    <strong>Наименование</strong>
+    <%= f.text_field :title, class: "form-control", placeholder: "Введите наименование"%>
+  </div><br>
   <div class="field">
-    <%= f.label 'Описание' %><br>
-    <%= f.text_field :description %>
-  </div>
+    <strong>Описание</strong>
+    <%= f.text_area :description, class: "form-control", rows: "3", placeholder: "Введите описание" %>
+  </div><br>
   <div class="field">
-    <%= f.label 'Страна' %><br>
-    <%= f.text_field :country %>
-  </div>
+    <strong>Страна</strong>
+    <%= f.country_select(:country) %><br>
+  </div><br>
   <div class="field">
-    <%= f.label 'Город' %><br>
-    <%= f.text_field :city %>
-  </div>
+    <strong>Город</strong>
+    <%= f.text_area :city, class: "form-control", placeholder: "Введите название города" %>
+  </div><br>
   <div class="actions">
     <%= f.submit %>
   </div>

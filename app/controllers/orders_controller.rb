@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  def index
+  def index     #запрос на вывод всех заказов
     if current_user.try(:admin?)  
       @orders = Order.where("status >= 1")
     else
@@ -8,11 +8,11 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
+  def show      #показать заказ
     @order = Order.find(params[:id])
   end
 
-  def user_complete
+  def user_complete     #статус заказа - подтверждено
     @order = Order.find(params[:id])
     if @order.complete!    
       flash[:notice] = 'Подтверждено'
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def admin_perform
+  def admin_perform     #статус заказа - выполняется
     @order = Order.find(params[:id])
     if @order.perform!    
       flash[:notice] = 'Заказ выполняется'
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def admin_made
+  def admin_made      #статус заказа - выполнен
     @order = Order.find(params[:id])
     if @order.made!    
       flash[:notice] = 'Заказ выполнен'
@@ -42,25 +42,24 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def destroy_all_line_items
+  def destroy_all_line_items    #очистить корзину
     @order = Order.find(params[:id])
     @order.line_items.map(&:delete)
     redirect_to products_url, notice: 'Корзина очищена'
   end  
 
-  def send_to_user
+  def send_to_user        #передать данные текущего заказа клиенту
     @order = current_order
     if @order.send!(send_to_user_params)
-      cookies[:current_order] = nil
       flash[:notice] = 'Товары отправлены'
-      check_current_order
     else
       flash[:alert] = 'Не удалось отправить товары'
     end
+    session[:current_order] = nil
     redirect_to products_path
   end
 
-  def destroy
+  def destroy   #удалить заказ
     @order = Order.find(params[:id])
     @order.destroy
     redirect_to orders_url, notice: 'Заказ удален'    
@@ -68,7 +67,7 @@ class OrdersController < ApplicationController
 
   private
 
-    def send_to_user_params
+    def send_to_user_params   #какие поля передавать клиенту
       params.require(:order).permit(:send_user_id, :email, :fio, :phone_number, :total_price, :message)
     end
 

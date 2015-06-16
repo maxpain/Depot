@@ -1,7 +1,9 @@
 class Order < ActiveRecord::Base
   has_many :line_items
   belongs_to :user
-  
+
+  validates :email, :fio, :phone_number, presence: true, if: :sended?
+
   before_create :set_status
 
   enum status: [:cart, :sended, :completed, :performed, :maded]

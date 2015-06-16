@@ -39,6 +39,8 @@ gem 'activeadmin', github: 'activeadmin'
 
 gem 'ransack'
 
+gem 'country_select', github: 'stefanpenner/country_select'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

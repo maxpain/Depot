@@ -12,6 +12,15 @@ def index
     @tiping = Tiping.new
   end
 
+  def destroy
+    if resource.destroy
+      flash[:notice] = 'Удалено'
+    else
+      flash[:error] = 'Не удалено, потому что есть товары с таким типом'
+    end
+    redirect_to tipings_path
+  end
+
   private
 
     def tiping_params

@@ -18,3 +18,4 @@
 /tmp
 /vendor/bundle
 /config/database.yml
+public/uploads

@@ -1,33 +1,37 @@
 class TidingsController < InheritedResources::Base
   before_action :set_tiding, only: [:show, :edit, :update, :destroy]
 
-  def index    
-    @tidings = Tiding.all
-  end
-
-  def show
+  def update
+    if @tiding.update(tiding_params)
+      redirect_to @tiding, notice: 'Новость успешно обновлена'
+    else
+      render :edit
+    end
   end
 
   def new
     @tiding = Tiding.new
   end
 
-  def edit
-  end
 
   def create
     @tiding = Tiding.new(tiding_params)
-
-    respond_to do |format|
       if @tiding.save
-        format.html { redirect_to @tiding, notice: 'Новость добавлена' }
-
+        redirect_to @tiding, notice: 'Новость добавлена'
       else
-        format.html { render :new }
-
+       render :new
       end
-    end
   end
+
+  def destroy
+    if resource.destroy
+      flash[:notice] = 'Удалено'
+    else
+      flash[:error] = 'Не удалось удалить'
+    end
+    redirect_to welcome_index_path
+  end
+
 
   private
 
