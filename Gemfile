@@ -24,7 +24,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
 
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', branch: 'master'
+
+gem 'fog'
 
 gem 'rmagick'
 
